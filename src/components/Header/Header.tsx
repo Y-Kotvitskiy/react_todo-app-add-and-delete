@@ -8,21 +8,10 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onAdd, inputRef }) => {
   const [title, setTitle] = useState('');
-  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setIsDisabled(true);
-    onAdd({ title })
-      .then(() => setTitle(''))
-      // eslint-disable-next-line no-console
-      .catch(error => {
-        // eslint-disable-next-line no-console
-        console.error(error?.message);
-      })
-      .finally(() => {
-        setIsDisabled(false);
-      });
+    onAdd({ title }).then(() => setTitle(''));
   };
 
   return (
@@ -43,7 +32,6 @@ export const Header: React.FC<HeaderProps> = ({ onAdd, inputRef }) => {
           placeholder="What needs to be done?"
           value={title}
           onChange={event => setTitle(event.target.value)}
-          disabled={isDisabled}
           autoFocus
         />
       </form>

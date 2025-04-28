@@ -3,6 +3,7 @@ import { TodoItem } from '../TodoItem';
 
 interface TodoListProps {
   lodingId: Todo['id'] | null;
+  loadingCompleted: boolean;
   todos: Todo[];
   tempTodo: Todo | null;
   onChange: (todo: Todo, fieldsToUpdate: Partial<Todo>) => Promise<unknown>;
@@ -11,6 +12,7 @@ interface TodoListProps {
 
 export const TodoList: React.FC<TodoListProps> = ({
   lodingId,
+  loadingCompleted,
   todos,
   tempTodo,
   onChange,
@@ -24,7 +26,9 @@ export const TodoList: React.FC<TodoListProps> = ({
           todo={todo}
           onChange={onChange}
           onDelete={onDelete}
-          isLoading={lodingId === todo.id}
+          isLoading={
+            lodingId === todo.id || (loadingCompleted && todo.completed)
+          }
         />
       ))}
       {tempTodo ? (

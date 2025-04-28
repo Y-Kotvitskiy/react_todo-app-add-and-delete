@@ -5,12 +5,16 @@ interface FooterProps {
   itemsLeft: number;
   filterState: FilterState;
   onFilter: (filterState: FilterState) => void;
+  disableClearButton: boolean;
+  onClearCompleted: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   itemsLeft,
   filterState,
   onFilter,
+  disableClearButton,
+  onClearCompleted,
 }) => {
   return (
     <>
@@ -61,6 +65,8 @@ export const Footer: React.FC<FooterProps> = ({
           type="button"
           className="todoapp__clear-completed"
           data-cy="ClearCompletedButton"
+          disabled={disableClearButton}
+          onClick={onClearCompleted}
         >
           Clear completed
         </button>
