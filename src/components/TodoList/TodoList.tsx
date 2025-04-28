@@ -4,6 +4,7 @@ import { TodoItem } from '../TodoItem';
 interface TodoListProps {
   lodingId: Todo['id'] | null;
   todos: Todo[];
+  tempTodo: Todo | null;
   onChange: (todo: Todo, fieldsToUpdate: Partial<Todo>) => Promise<unknown>;
   onDelete: (todoId: Todo) => void;
 }
@@ -11,6 +12,7 @@ interface TodoListProps {
 export const TodoList: React.FC<TodoListProps> = ({
   lodingId,
   todos,
+  tempTodo,
   onChange,
   onDelete,
 }) => {
@@ -25,6 +27,14 @@ export const TodoList: React.FC<TodoListProps> = ({
           isLoading={lodingId === todo.id}
         />
       ))}
+      {tempTodo ? (
+        <TodoItem
+          todo={tempTodo}
+          onChange={onChange}
+          onDelete={onDelete}
+          isLoading={true}
+        />
+      ) : null}
     </section>
   );
 };

@@ -7,6 +7,14 @@ export const getTodos = () => {
   return client.get<Todo[]>(`/todos?userId=${USER_ID}`);
 };
 
+export const postTodo = (todo: Todo) => {
+  return client.post<Todo>(`/todos?userId=${USER_ID}`, todo);
+};
+
+export const deleteTodo = (todoId: Todo['id']) => {
+  return client.delete(`/todos/${todoId}?userId=${USER_ID}`);
+};
+
 // Add more methods here
 
 export const getTodosMock = () => {

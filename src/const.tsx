@@ -6,6 +6,12 @@ export const MESSAGE = {
   UNABLE_UPDARE: 'Unable to update a todo',
 };
 
+export enum ACTION {
+  ADD = 'Add',
+  DELETE = 'Delete',
+  UNKNOWN = 'Unknown',
+}
+
 // Unable to load todos
 // <br />
 // Title should not be empty

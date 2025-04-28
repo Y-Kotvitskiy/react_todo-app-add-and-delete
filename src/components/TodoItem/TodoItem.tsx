@@ -72,7 +72,7 @@ export const TodoItem = ({
             className="todo__title-field"
             placeholder="Empty todo will be deleted"
             value={editValue}
-            autoFocus
+            // autoFocus
             onChange={event => setEditValue(event.target.value)}
             onBlur={() => handleSubmit(todo)}
             onKeyUp={event => {
