@@ -14,5 +14,3 @@ export const postTodo = (todo: Todo) => {
 export const deleteTodo = (todoId: Todo['id']) => {
   return client.delete(`/todos/${todoId}`);
 };
-
-

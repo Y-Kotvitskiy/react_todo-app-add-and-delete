@@ -179,7 +179,7 @@ export const App: React.FC = () => {
           setTodos(todos.filter(todo => !deleteIds.includes(todo.id)));
         }
 
-        setLoadingCompleted(true);
+        setLoadingCompleted(false);
         setLastOperation(ACTION.DELETE);
 
         if (hasDeleteError) {
