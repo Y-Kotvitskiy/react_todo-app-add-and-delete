@@ -1,3 +1,5 @@
+import './TodoList.scss';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Todo } from '../../types/Todo';
 import { TodoItem } from '../TodoItem';
 
@@ -20,25 +22,31 @@ export const TodoList: React.FC<TodoListProps> = ({
 }) => {
   return (
     <section className="todoapp__main" data-cy="TodoList">
-      {todos.map(todo => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onChange={onChange}
-          onDelete={onDelete}
-          isLoading={
-            lodingId === todo.id || (loadingCompleted && todo.completed)
-          }
-        />
-      ))}
-      {tempTodo ? (
-        <TodoItem
-          todo={tempTodo}
-          onChange={onChange}
-          onDelete={onDelete}
-          isLoading={true}
-        />
-      ) : null}
+      <TransitionGroup>
+        {todos.map(todo => (
+          <CSSTransition key={todo.id} timeout={300} classNames="item">
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onChange={onChange}
+              onDelete={onDelete}
+              isLoading={
+                lodingId === todo.id || (loadingCompleted && todo.completed)
+              }
+            />
+          </CSSTransition>
+        ))}
+        {tempTodo ? (
+          <CSSTransition key={0} timeout={300} classNames="temp-item">
+            <TodoItem
+              todo={tempTodo}
+              onChange={onChange}
+              onDelete={onDelete}
+              isLoading={true}
+            />
+          </CSSTransition>
+        ) : null}
+      </TransitionGroup>
     </section>
   );
 };
