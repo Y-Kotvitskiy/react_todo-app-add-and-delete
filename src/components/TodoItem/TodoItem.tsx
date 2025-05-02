@@ -18,6 +18,7 @@ export const TodoItem = ({
 }: TodoProps) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editValue, setEditValue] = useState('');
+  const { title, completed } = todo;
 
   const handleTitleClick = (
     event: React.MouseEvent<HTMLSpanElement, MouseEvent>,
@@ -47,17 +48,14 @@ export const TodoItem = ({
   };
 
   return (
-    <div
-      data-cy="Todo"
-      className={cn('todo', { completed: todo.completed === true })}
-    >
+    <div data-cy="Todo" className={cn('todo', { completed })}>
       <label className="todo__status-label">
         <input
           data-cy="TodoStatus"
           type="checkbox"
           className="todo__status"
-          checked={todo.completed === true}
-          onChange={() => onChange(todo, { completed: !todo.completed })}
+          checked={completed === true}
+          onChange={() => onChange(todo, { completed: !completed })}
         />
       </label>
       {isEdit ? (
@@ -89,7 +87,7 @@ export const TodoItem = ({
             className="todo__title"
             onClick={event => handleTitleClick(event, todo)}
           >
-            {todo.title}
+            {title}
           </span>
           {/* Remove button appears only on hover */}
           <button
